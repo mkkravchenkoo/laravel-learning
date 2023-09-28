@@ -27,3 +27,5 @@ config/app.php - тут описані все сервіси
 'php artisan make:provider TestServiceProvider' - створити свій провайдер
 реєструємо його, підключаємо в `config/app.php`
 і тоді можемо викикати 'app("test")->config()'
+
+Можемо зробити свій фасад  - і тоді визвати - 'Test::config()'
