@@ -29,3 +29,5 @@ config/app.php - тут описані все сервіси
 і тоді можемо викикати 'app("test")->config()'
 
 Можемо зробити свій фасад  - і тоді визвати - 'Test::config()'
+
+можемо додати свій хелпер, прописати його в composer.json, потім ' ./vendor/bin/sail composer dump'
