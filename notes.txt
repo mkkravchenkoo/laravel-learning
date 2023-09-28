@@ -24,4 +24,6 @@ Facades - це можливість викликати фічі ларавеля
 Service Providers - дає можливість реєструвати свої сервіси в контейнері
 config/app.php - тут описані все сервіси
 Деякі сервіси є в папці app/Providers
-'php artisan make:provider RiakServiceProvider' - створити свій провайдер
+'php artisan make:provider TestServiceProvider' - створити свій провайдер
+реєструємо його, підключаємо в `config/app.php`
+і тоді можемо викикати 'app("test")->config()'
