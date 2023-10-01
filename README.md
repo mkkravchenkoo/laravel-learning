@@ -71,3 +71,9 @@ For CRUD we can use resource in this way `Route::resource('posts', PostControlle
 
 we have helper, that can show url - `route("posts.store")`  
 
+## Middleware  
+Some default middlewares you can find in` app/Http/Middleware`
+Create middleware `./vendor/bin/sail artisan make:middleware LogMiddleware`  
+add it to separate route `Route::get('/test', TestController::class)->middleware(LogMiddleware::class);`
+log will be written in `storage/logs/laravel.log`  
+global middlewares are in `app/Http/Kernel.php`

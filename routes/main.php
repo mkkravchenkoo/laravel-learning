@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Posts\CommentController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TestController;
+use App\Http\Middleware\LogMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,11 +20,13 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/test', TestController::class);
 
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::middleware('guest')->group(function (){
+    Route::get('/register', [RegisterController::class, 'index'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
-Route::post('/login', [LoginController::class, 'login'])->name('login');
-Route::get('/login', [LoginController::class, 'store'])->name('login.store');
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
+    Route::get('/login', [LoginController::class, 'store'])->name('login.store');
+});
 
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
