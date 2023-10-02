@@ -77,3 +77,75 @@ Create middleware `./vendor/bin/sail artisan make:middleware LogMiddleware`
 add it to separate route `Route::get('/test', TestController::class)->middleware(LogMiddleware::class);`
 log will be written in `storage/logs/laravel.log`  
 global middlewares are in `app/Http/Kernel.php`
+
+## Pages
+in blade we can use directives (@) and interpolation {{smthg}}. Some of them
+```
+@php
+    $time = time();
+    $str = '<h2>Hello</h2>'
+@endphp
+
+@if(true)
+    is true
+@endif
+
+{!!$str!!}  {{-- html output --}};
+
+@{{$str}}  {{-- skip this handle --}};
+
+@json(['app' => 'myApp'])
+
+@foreach([1,2,3] as $value)
+    {{$value}}
+@endforeach
+
+@include('includes.header')
+
+{{route('register')}} - generate url
+
+@yield('content') - create section
+
+@section('content')
+    <h1>Login</h1>
+@endsection
+```
+
+To bind view with template (and add vars):   
+```php
+class LoginController extends Controller
+{
+    public function index(){
+//        return view('login.index')->with('foo', 'bar'); //this also works;
+        return view('login.index', ['foo' => 'bar']); // this is more popular
+    }
+}
+```
+Create section (to extend)  
+`layouts.base.blade.php`  
+```html
+<main class="flex-grow-1 py-3">
+    @yield('content')
+</main>
+
+```
+
+extend our layouts.base.blade.php  
+```html
+@extends('layouts.base')
+@section('content')
+    <h1>Login</h1>
+@endsection
+```
+
+To share variable in whole app, use `AppServiceProvider::boot`  
+```php
+    public function boot(): void
+    {
+        View::share('date', date('Y'));
+        View::composer('blog*', function ($view){
+            // share in 'blog*'
+            $view->with('balance', 123);
+        });
+    }
+```

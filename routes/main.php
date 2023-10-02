@@ -24,22 +24,22 @@ Route::middleware('guest')->group(function (){
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
-    Route::post('/login', [LoginController::class, 'login'])->name('login');
-    Route::get('/login', [LoginController::class, 'store'])->name('login.store');
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 });
 
 
-Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{blog}', [BlogController::class, 'show'])->name('blog.show');
 Route::post('/blog/{blog}/like', [BlogController::class, 'like'])->name('blog.like');
 
 Route::resource('posts/{post}/comments', CommentController::class);
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::view('/', 'welcome'); // the same
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+Route::view('/', 'home.index')->name('home'); // the same
 
 Route::redirect('/home', '/');
 //Route::fallback(function (){

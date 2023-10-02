@@ -7,13 +7,33 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     //
-    public function index(){
-        return 'list';
+    public function index()
+    {
+        $post = (object)[
+            'id' => '123',
+            'title' => 'lorem',
+            'content' => 'Lorem <strong>ipsum</strong> dolor sit amet, consectetur adipisicing elit. Perferendis, provident?'
+        ];
+
+        $posts = array_fill(0, 10, $post);
+        $posts = collect($posts);
+        return view('blog.index', ['posts' => $posts]);
     }
-    public function show(){
-        return 'show';
+
+    public function show()
+    {
+
+        $post = (object)[
+            'id' => '123',
+            'title' => 'lorem',
+            'content' => 'Lorem <strong>ipsum</strong> dolor sit amet, consectetur adipisicing elit. Perferendis, provident?'
+        ];
+
+        return view('blog.show', ['post' => $post]);
     }
-    public function like(){
+
+    public function like()
+    {
         return 'v';
     }
 }
