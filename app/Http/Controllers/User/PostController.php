@@ -7,19 +7,41 @@ use App\Http\Controllers\Controller;
 class PostController extends Controller
 {
     public function index(){
-        return 'page - list';
+        $post = (object)[
+            'id' => '123',
+            'title' => 'lorem',
+            'content' => 'Lorem <strong>ipsum</strong> dolor sit amet, consectetur adipisicing elit. Perferendis, provident?'
+        ];
+
+        $posts = array_fill(0, 10, $post);
+        $posts = collect($posts);
+
+
+        return view('user.posts.index', ['posts' => $posts]);
     }
     public function create(){
-        return 'page - create new post';
+        return view('user.posts.create');
     }
     public function store(){
         return 'request - save post';
     }
     public function show($post){
-        return "page - show post {$post}";
+        $post = (object)[
+            'id' => '123',
+            'title' => 'lorem',
+            'content' => 'Lorem <strong>ipsum</strong> dolor sit amet, consectetur adipisicing elit. Perferendis, provident?'
+        ];
+        return view('user.posts.show', ['post' => $post]);
     }
-    public function edit(){
-        return 'page - edit post';
+    public function edit($post){
+        $post = (object)[
+            'id' => '123',
+            'title' => 'lorem',
+            'published' => true,
+            'content' => 'Lorem <strong>ipsum</strong> dolor sit amet, consectetur adipisicing elit. Perferendis, provident?'
+        ];
+
+        return view('user.posts.edit', ['post' => $post]);
     }
     public function update(){
         return 'request - edit post';

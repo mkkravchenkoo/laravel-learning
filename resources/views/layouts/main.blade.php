@@ -1,9 +1,9 @@
 @extends('layouts.base')
 
 @section('content')
-{{--    <section>--}}
-{{--        <x-container>--}}
+    <section>
+        <x-container>
             @yield('main.content')
-{{--        </x-container>--}}
-{{--    </section>--}}
+        </x-container>
+    </section>
 @endsection

@@ -109,6 +109,21 @@ in blade we can use directives (@) and interpolation {{smthg}}. Some of them
 @section('content')
     <h1>Login</h1>
 @endsection
+
+
+@stack('css') // set in parent template
+@stack('js')
+
+@once
+    @push('css')
+        <link rel="stylesheet" href="/css/trix.css">
+    @endpush
+    
+    @push('js')
+        <script src="/js/trix.js"></script>
+    @endpush
+@endonce
+
 ```
 
 To bind view with template (and add vars):   
@@ -148,4 +163,36 @@ To share variable in whole app, use `AppServiceProvider::boot`
             $view->with('balance', 123);
         });
     }
+```
+
+## Blade Components  
+
+Create components
+`resources/views/components/card.blade.php`
+```html
+@props(['myprop' => false]) {{--describe props and set defualt value --}}
+<div class="card mb-3"{{$attributes->merge(['one' => '1', 'two' => '2'])}}> // this will output all attributes key=>value. Add default attributes with merge() method
+
+    {{ $slot }} {{-- default slot --}}
+ 
+    @dump($myprop)
+
+    @isset($myslot)  {{-- custom slot --}}
+        <div>{{ $myslot }}</div>
+    @endisset
+
+</div>
+```
+Use component in template
+`:post` - means, that this is object, not component attribute.
+```html
+ <div class="col-12">
+    <x-card my-custom-attr="abc" myprop one="0" :post="$post">
+        my content 
+        <x-slot name="myslot"> {{-- custom slot --}}
+            myslot
+        </x-slot>
+    </x-card>
+   
+</div>
 ```

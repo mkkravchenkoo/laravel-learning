@@ -1,5 +1,7 @@
-@extends('layouts.base')
+@extends('layouts.main')
 @section('page.title', 'Home!')
-@section('content')
-    <h1>Home page</h1>
+@section('main.content')
+    <x-title>
+        {{ __('Home page') }}
+    </x-title>
 @endsection
