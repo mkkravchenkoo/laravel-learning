@@ -221,3 +221,19 @@ or
         $request->fullUrl();
     }
 ```
+## Responses  
+```php
+  public function __invoke()
+    {
+        $html = response('Test', 200, ["k1" => 'v1']);
+        $json = response()->json(['key1' => 'val1'], 200, ['k1' => 'v1']);
+        return $json;
+    }
+
+
+        return redirect('/abc'); // redirect to url
+        return redirect()->route('user'); // redirect to route
+        return redirect()->back();
+        return redirect()->back()->withInput(); // redirect with form values
+```
+

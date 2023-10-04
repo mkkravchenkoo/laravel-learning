@@ -27,9 +27,7 @@ class PostController extends Controller
        $title = $request->input('title');
        $content = $request->input('content');
 
-        dump($title, $content);
-
-        return 'request - save post';
+       return redirect()->route('user.posts.show', 123);
     }
     public function show($post){
         $post = (object)[
@@ -49,15 +47,15 @@ class PostController extends Controller
 
         return view('user.posts.edit', ['post' => $post]);
     }
-    public function update(Request $request){
+    public function update(Request $request, $post){
 
         $title = $request->input('title');
         $content = $request->input('content');
-        dump($title, $content);
-        return 'request - edit post';
+
+        return redirect()->back();
     }
     public function delete(){
-        return 'request - delete post';
+        return redirect()->route('user.posts');
     }
     public function like(){
         return 'request - like';

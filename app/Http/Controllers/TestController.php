@@ -8,6 +8,8 @@ class TestController extends Controller
 {
     public function __invoke()
     {
-        return 'test';
+        $html = response('Ttt', 200, ["t" => 'a']);
+        $json = response()->json(['a' => 'b'], 200, ['k1' => 'v1']);
+        return $json;
     }
 }

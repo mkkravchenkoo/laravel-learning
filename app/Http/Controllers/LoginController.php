@@ -16,6 +16,7 @@ class LoginController extends Controller
         $password = $request->input('password');
         $remember = $request->boolean('remember');
 
-        dump($email, $password, $remember);
+        return redirect()->route('user');
+//        dump($email, $password, $remember);
     }
 }
