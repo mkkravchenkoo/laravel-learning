@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+        $category_id = $request->input('category_id');
+
         $post = (object)[
             'id' => '123',
             'title' => 'lorem',

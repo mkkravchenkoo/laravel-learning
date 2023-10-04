@@ -124,6 +124,8 @@ in blade we can use directives (@) and interpolation {{smthg}}. Some of them
     @endpush
 @endonce
 
+{{request('tag')}}
+
 ```
 
 To bind view with template (and add vars):   
@@ -195,4 +197,27 @@ Use component in template
     </x-card>
    
 </div>
+or
+<x-select :options="[1 => 1, 2 => 2]"/>
+```
+
+## Requests
+```php
+    public function store(Request $request){
+        $request->all();
+        $request->only(['name']);
+        $request->except(['_token']);
+        $request->input('email');
+        $request->boolean('agreement');
+        $request->email;
+        $request->file('avatar');
+        $request->has('name');
+        $request->filled('name');
+        $request->missing('first_name');
+
+        $request->ip();
+        $request->path();
+        $request->url();
+        $request->fullUrl();
+    }
 ```

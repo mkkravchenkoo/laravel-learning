@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -22,7 +23,12 @@ class PostController extends Controller
     public function create(){
         return view('user.posts.create');
     }
-    public function store(){
+    public function store(Request $request){
+       $title = $request->input('title');
+       $content = $request->input('content');
+
+        dump($title, $content);
+
         return 'request - save post';
     }
     public function show($post){
@@ -43,7 +49,11 @@ class PostController extends Controller
 
         return view('user.posts.edit', ['post' => $post]);
     }
-    public function update(){
+    public function update(Request $request){
+
+        $title = $request->input('title');
+        $content = $request->input('content');
+        dump($title, $content);
         return 'request - edit post';
     }
     public function delete(){

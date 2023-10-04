@@ -7,7 +7,7 @@
         {{ __('Post list') }}
     </x-title>
 
-{{--    @include('blog.filter')--}}
+    @include('blog.filter')
 
     @if($posts->isEmpty())
         {{ __('No posts') }}
