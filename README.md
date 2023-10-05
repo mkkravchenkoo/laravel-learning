@@ -237,3 +237,16 @@ or
         return redirect()->back()->withInput(); // redirect with form values
 ```
 
+## Session
+config is in `config/session.php`  
+
+```php
+session(['foo' => 'bar', 'baz' => 'gas']); // write to session
+session('foo'); // read from session
+session()->has('foo') // check if session has key
+session()->all() // get all values
+session()->forget('foo'); // clear one value
+session()->flush();// clear all session
+session()->pull('alert') // get and delete item
+```
+

@@ -26,7 +26,7 @@ class PostController extends Controller
     public function store(Request $request){
        $title = $request->input('title');
        $content = $request->input('content');
-
+       alert(__('Created!'));
        return redirect()->route('user.posts.show', 123);
     }
     public function show($post){
@@ -51,7 +51,7 @@ class PostController extends Controller
 
         $title = $request->input('title');
         $content = $request->input('content');
-
+        alert(__('Updated'));
         return redirect()->back();
     }
     public function delete(){

@@ -18,3 +18,11 @@ if (!function_exists('active_link')) {
     }
 
 }
+if (!function_exists('alert')) {
+    function alert($msg)
+    {
+
+        return session(['alert' => $msg]);
+    }
+
+}
