@@ -249,4 +249,32 @@ session()->forget('foo'); // clear one value
 session()->flush();// clear all session
 session()->pull('alert') // get and delete item
 ```
+## Database  
+config is in `config/database.php`  
+Migrations are in `database/migrations`  
+Create migration  
+```bash
+./vendor/bin/sail php artisan make:migration create_users_table
+```
+modify columns and run migration
+```bash
+./vendor/bin/sail php artisan migrate
+```
+create another one migration
+```bash
+php artisan make:migration add_admin_field_to_users_table
+```
 
+revert last migration
+```bash
+./vendor/bin/sail php artisan migrate:rollback
+
+```
+revert all migrations
+```bash
+ ./vendor/bin/sail php artisan migrate:reset
+```
+revert all migrations and migrate again (migrate:reset+ migrate)
+```bash
+./vendor/bin/sail php artisan migrate:fresh
+```
