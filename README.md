@@ -278,3 +278,21 @@ revert all migrations and migrate again (migrate:reset+ migrate)
 ```bash
 ./vendor/bin/sail php artisan migrate:fresh
 ```
+## Model
+create model  
+```bash
+./vendor/bin/sail php artisan make:model Currency
+```
+file `app/Models/Currency.php` will be created  
+Create model with migration  
+```bash
+./vendor/bin/sail php artisan make:model Currency -m
+```
+Some useful methods
+```php
+ $currency = App\Models\Currency::first();
+$currency->toArray();
+$currency->toJson();
+$currency->name
+```
+
