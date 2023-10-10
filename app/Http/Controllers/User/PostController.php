@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\StorePostRequest;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
@@ -23,11 +25,16 @@ class PostController extends Controller
     public function create(){
         return view('user.posts.create');
     }
-    public function store(Request $request){
+    public function store(StorePostRequest $request){
        $validated = validator($request->all(), [
            'title' => ['required', 'string', 'max:100'],
            'content' => ['required', 'string'],
        ])->validate();
+//       $validated = $request->validated(); // our values
+
+//        throw ValidationException::withMessages([
+//            'custom_field' => 'Custom message'
+//        ]);
 
        alert(__('Created!'));
        return redirect()->route('user.posts.show', 123);
@@ -52,8 +59,11 @@ class PostController extends Controller
     }
     public function update(Request $request, $post){
 
-        $title = $request->input('title');
-        $content = $request->input('content');
+        $validated = validator($request->all(), [
+            'title' => ['required', 'string', 'max:100'],
+            'content' => ['required', 'string'],
+        ])->validate();
+
         alert(__('Updated'));
         return redirect()->back();
     }

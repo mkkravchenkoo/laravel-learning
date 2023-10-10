@@ -317,3 +317,15 @@ Example validation in controller
        // do something with $validated
     }
 ```
+Create post request for validation (another way)
+```bash
+ ./vendor/bin/sail php artisan make:request Post/StorePostRequest
+```
+Then use in controller this request in argument instead of default
+
+We can throw custom error
+```php
+    throw ValidationException::withMessages([
+        'custom_field' => 'Custom message'
+    ]);
+```
