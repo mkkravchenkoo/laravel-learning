@@ -296,3 +296,24 @@ $currency->toJson();
 $currency->name
 ```
 
+## Validation  
+```php
+validator([], [])
+Validator::make([], [])
+validator(['email' => 'aaa@mail.de'], ['email' => 'required|string|email']);
+
+$validator = validator(['email' => 'aaa@mail.de'], ['email' => ['required', 'string', 'email']]);
+$validator->passes(); // true or false
+$validator->fails(); // true or false
+$validator->validate(); // returns validated fields
+```
+Example validation in controller
+```php
+    public function store(Request $request){
+       $validated = validator($request->all(), [
+           'title' => ['required', 'string', 'max:100'],
+           'content' => ['required', 'string'],
+       ])->validate();
+       // do something with $validated
+    }
+```

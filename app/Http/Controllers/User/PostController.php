@@ -24,8 +24,11 @@ class PostController extends Controller
         return view('user.posts.create');
     }
     public function store(Request $request){
-       $title = $request->input('title');
-       $content = $request->input('content');
+       $validated = validator($request->all(), [
+           'title' => ['required', 'string', 'max:100'],
+           'content' => ['required', 'string'],
+       ])->validate();
+
        alert(__('Created!'));
        return redirect()->route('user.posts.show', 123);
     }
