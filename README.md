@@ -329,3 +329,25 @@ We can throw custom error
         'custom_field' => 'Custom message'
     ]);
 ```
+We can use validation to compare values from DB  
+```php
+    [
+       'country_id' => ['required', 'integer', 'exists:countries,id'], 
+       'country_id' => ['required', 'integer', Rule::exists('countries', 'id')->where('active', true)], // check with condition
+       'name' => ['required', 'unique:users,name'], // not yet in database
+       'email' => ['required', Rule::unique('users', 'email')->ignore($user->id)], // all except some user
+        // callback
+       'title' => [ 'required', function (string $attribute, mixed $value, Closure $fail) {
+            if ($value === 'foo') {
+                $fail("The {$attribute} is invalid.");
+            }
+          },
+       ],
+    ]
+
+```
+Create custom rule
+```bash
+./vendor/bin/sail artisan make:rule Phone
+```
+
