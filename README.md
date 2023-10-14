@@ -335,6 +335,7 @@ We can use validation to compare values from DB
        'country_id' => ['required', 'integer', 'exists:countries,id'], 
        'country_id' => ['required', 'integer', Rule::exists('countries', 'id')->where('active', true)], // check with condition
        'name' => ['required', 'unique:users,name'], // not yet in database
+       'published_at' => ['required', 'string', 'date_format:Y.m.d'],
        'email' => ['required', Rule::unique('users', 'email')->ignore($user->id)], // all except some user
         // callback
        'title' => [ 'required', function (string $attribute, mixed $value, Closure $fail) {
@@ -349,5 +350,26 @@ We can use validation to compare values from DB
 Create custom rule
 ```bash
 ./vendor/bin/sail artisan make:rule Phone
+```
+
+Save to DB  
+```php
+        User::query()->create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password'])
+        ]);
+```
+Some different ways to fill object  
+```php
+    $user = new User([
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'password' => bcrypt($validated['password']),
+    ]);
+    $user->setAttribute('email', $validated['email']);
+    $user->fill(['email' => $validated['email']]);
+    $user->email = $validated['email'];
+    $user->save();
 ```
 
