@@ -25,12 +25,11 @@
                 </h2>
 
                 <div class="small text-muted">
-{{--                    {{ $post->published_at?->format('d.m.Y H:i:s') }}--}}
-                    {{ now()->format('d.m.Y H:m:s') }}
+                    {{ $post->published_at?->format('d.m.Y H:i:s') }}
                 </div>
             </div>
         @endforeach
 
-{{--        {{ $posts->links() }}--}}
+        {{ $posts->links() }}
     @endif
 @endsection

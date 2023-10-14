@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -12,14 +13,7 @@ class BlogController extends Controller
         $search = $request->input('search');
         $category_id = $request->input('category_id');
 
-        $post = (object)[
-            'id' => '123',
-            'title' => 'lorem',
-            'content' => 'Lorem <strong>ipsum</strong> dolor sit amet, consectetur adipisicing elit. Perferendis, provident?'
-        ];
-
-        $posts = array_fill(0, 10, $post);
-        $posts = collect($posts);
+        $posts = Post::query()->orderBy('published_at', 'desc')->paginate(12, ['id', 'title','published_at']);
         return view('blog.index', ['posts' => $posts]);
     }
 

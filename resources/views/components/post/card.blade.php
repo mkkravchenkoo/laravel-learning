@@ -7,8 +7,7 @@
         </h2>
 
         <div class="small text-muted">
-{{--            {{ $post->published_at?->diffForHumans() }}--}}
-            {{ now()->format('d.m.Y H:m:s') }}
+            {{ $post->published_at?->diffForHumans() }}
         </div>
 
         {{ $post->id }}

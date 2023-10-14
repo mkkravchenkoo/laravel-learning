@@ -13,16 +13,7 @@ use Illuminate\Validation\ValidationException;
 class PostController extends Controller
 {
     public function index(){
-        $post = (object)[
-            'id' => '123',
-            'title' => 'lorem',
-            'content' => 'Lorem <strong>ipsum</strong> dolor sit amet, consectetur adipisicing elit. Perferendis, provident?'
-        ];
-
-        $posts = array_fill(0, 10, $post);
-        $posts = collect($posts);
-
-
+        $posts = Post::query()->orderBy('published_at', 'desc')->paginate(12, ['id', 'title','published_at']);
         return view('user.posts.index', ['posts' => $posts]);
     }
     public function create(){

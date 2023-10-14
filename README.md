@@ -352,7 +352,7 @@ Create custom rule
 ./vendor/bin/sail artisan make:rule Phone
 ```
 
-Save to DB  
+## Save to DB  
 ```php
         User::query()->create([
             'name' => $validated['name'],
@@ -373,3 +373,23 @@ Some different ways to fill object
     $user->save();
 ```
 
+## Faker example  
+```php
+      for($i=0; $i < 99; $i++){
+           $post = Post::query()->create([
+               'user_id' => User::query()->value('id'),
+               'title' => fake()->sentence(),
+               'content' => fake()->paragraph(),
+               'published_at' => fake()->dateTimeBetween(now()->subYear(), now()),
+               'published' => true
+           ]);
+       }
+```
+
+## Get data from DB  
+```php
+    $posts = Post::all(['id', 'title','published_at']); // get all posts with separate fields
+    $posts = Post::query()->limit(12)->get(['id', 'title','published_at']); // with limit
+    $posts = Post::query()->paginate(12, ['id', 'title','published_at']); // with pagination
+
+```
