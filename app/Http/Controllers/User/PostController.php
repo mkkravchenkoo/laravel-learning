@@ -43,6 +43,7 @@ class PostController extends Controller
        return redirect()->route('user.posts.show', 123);
     }
     public function show($post){
+
         $post = (object)[
             'id' => '123',
             'title' => 'lorem',

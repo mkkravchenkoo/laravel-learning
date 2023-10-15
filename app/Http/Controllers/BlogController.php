@@ -17,15 +17,13 @@ class BlogController extends Controller
         return view('blog.index', ['posts' => $posts]);
     }
 
-    public function show()
+    public function show($post)
     {
+        $post = Post::query()->find($post, ['id', 'title', 'content']);
 
-        $post = (object)[
-            'id' => '123',
-            'title' => 'lorem',
-            'content' => 'Lorem <strong>ipsum</strong> dolor sit amet, consectetur adipisicing elit. Perferendis, provident?'
-        ];
-
+        if(!$post){
+            abort(404);
+        }
         return view('blog.show', ['post' => $post]);
     }
 

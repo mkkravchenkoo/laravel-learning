@@ -393,3 +393,11 @@ Some different ways to fill object
     $posts = Post::query()->paginate(12, ['id', 'title','published_at']); // with pagination
 
 ```
+
+## get post by id 
+```php
+    $post = Post::query()->where('id', $post)->first();
+    $post = Post::query()->find($post, ['id', 'title', 'content']);
+    $post = Post::query()->find([1,2,3], ['id', 'title', 'content']);
+
+```
