@@ -413,3 +413,44 @@ Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
     }
 
 ```
+
+Get sql
+```php
+    $posts = Post::query()->where('title', 'like', '%Eum%')->toSql();
+    dd($posts);
+```
+
+Conditions
+```php
+    $posts = Post::query()
+        ->where('title', 'like', '%Eum%')
+        
+        ->where('published_at', '!=', null)
+        ->whereNull('published_at')
+        ->whereNotNull('published_at')
+        
+        ->whereIn('id', [1,20,22])
+        ->whereNotIn('id', [1,20,22])
+        
+        ->where('published_at', '>', new Carbon('2023-01-18'))
+
+        ->whereDate('published_at', new Carbon('2023-01-18'))
+        ->whereYear('published_at', '2023')
+        ->whereMonth('published_at', 1)
+        ->whereDay('published_at', 19)
+        
+        ->whereBetween('published_at', [
+            new Carbon('2023-01-18'),
+            new Carbon('2023-01-20')
+        ])
+        
+        ->orWhereNotNull('published_at') // or condition
+
+        // some nested queries
+        ->where('published', true)
+        ->where(function (Builder $query){
+            $query
+                ->whereNotNull('published_at')
+                ->where('published_at', '>', new Carbon('2023-01-18'));
+        })
+```
