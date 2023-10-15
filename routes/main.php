@@ -30,8 +30,8 @@ Route::middleware('guest')->group(function (){
 
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
-Route::get('/blog/{blog}', [BlogController::class, 'show'])->name('blog.show');
-Route::post('/blog/{blog}/like', [BlogController::class, 'like'])->name('blog.like');
+Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
+Route::post('/blog/{post}/like', [BlogController::class, 'like'])->name('blog.like');
 
 Route::resource('posts/{post}/comments', CommentController::class);
 

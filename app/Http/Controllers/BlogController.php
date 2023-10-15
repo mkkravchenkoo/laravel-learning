@@ -17,13 +17,8 @@ class BlogController extends Controller
         return view('blog.index', ['posts' => $posts]);
     }
 
-    public function show($post)
+    public function show(Request $request, Post $post)
     {
-        $post = Post::query()->find($post, ['id', 'title', 'content']);
-
-        if(!$post){
-            abort(404);
-        }
         return view('blog.show', ['post' => $post]);
     }
 

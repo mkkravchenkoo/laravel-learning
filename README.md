@@ -401,3 +401,15 @@ Some different ways to fill object
     $post = Post::query()->find([1,2,3], ['id', 'title', 'content']);
 
 ```
+
+## Model routing binding
+```php
+Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
+```
+```php
+    public function show(Request $request, Post $post)
+    {
+        return view('blog.show', ['post' => $post]);
+    }
+
+```
