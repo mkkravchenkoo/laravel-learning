@@ -17,13 +17,16 @@ class BlogController extends Controller
             'search' => ['nullable', 'string', 'max:50'],
             'from_date' => ['nullable', 'string', 'date'],
             'to_date' => ['nullable', 'string', 'date', 'after:from_date'],
-//            'tag' => ['nullable', 'string', 'max:10'],
+            'tag' => ['nullable', 'string', 'max:10'],
         ]);
 
         $query = Post::query();
 
         if($search = $validated['search']){
             $query->where('title', 'like', "%{$search}%");
+        }
+        if($tag = $validated['tag']){
+            $query->whereJsonContains('tags', $tag);
         }
 
         if($fromDate = $validated['from_date']){

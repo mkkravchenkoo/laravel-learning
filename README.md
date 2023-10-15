@@ -444,6 +444,8 @@ Conditions
             new Carbon('2023-01-20')
         ])
         
+        ->whereJsonContains('tags', $tag); // search in json string
+        
         ->orWhereNotNull('published_at') // or condition
 
         // some nested queries
